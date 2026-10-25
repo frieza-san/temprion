@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en" data-theme="dark" style="--h: 113; color-scheme: dark;"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Temprion — Hot. Cold. Handled.</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&amp;display=swap" rel="stylesheet">
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+--bg:#f6f4ef;--fg:#12131a;--mu:#5d6070;--card:#fff;--line:#e0ddd4;--hot:#ff5a36;--cold:#12b8e8;--h:200}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0b0c12;--fg:#f2f1ec;--mu:#9a9db0;--card:#151722;--line:#262a3b}}
+:root[data-theme="dark"]{--bg:#0b0c12;--fg:#f2f1ec;--mu:#9a9db0;--card:#151722;--line:#262a3b}
+html{height:auto;scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:400 17px/1.55 'Space Grotesk',system-ui,sans-serif;overflow-x:hidden}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;display:flex;gap:6px;align-items:center;flex-wrap:wrap;padding:12px 5vw;backdrop-filter:blur(14px);background:color-mix(in srgb,var(--bg) 78%,transparent);border-bottom:1px solid var(--line)}
+nav b{font-size:22px;letter-spacing:-1px;margin-right:auto;background:linear-gradient(90deg,var(--hot),var(--cold));-webkit-background-clip:text;background-clip:text;color:transparent}
+nav a{color:var(--fg);text-decoration:none;padding:6px 12px;border-radius:99px;font-size:15px}
+nav a.on,nav a:hover{background:var(--fg);color:var(--bg)}
+main{padding:0 5vw 80px;max-width:1200px;margin:auto;animation:in .5s}
+@keyframes in{from{opacity:0;transform:translateY(14px)}}
+h1{font-size:clamp(44px,9vw,110px);line-height:.95;letter-spacing:-3px;margin:.4em 0 .2em}
+h1 em{font-style:normal;background:linear-gradient(90deg,var(--hot),var(--cold));-webkit-background-clip:text;background-clip:text;color:transparent}
+h2{font-size:clamp(30px,5vw,54px);letter-spacing:-1.5px;margin:1.2em 0 .4em;line-height:1}
+.mu{color:var(--mu)}
+.hero{display:grid;grid-template-columns:1.1fr 1fr;gap:30px;align-items:center;padding-top:30px}
+@media(max-width:800px){.hero{grid-template-columns:1fr}}
+.stage{position:relative;aspect-ratio:1;border-radius:36px;background:radial-gradient(circle at 50% 55%,hsl(var(--h) 95% 55%/.9),transparent 65%),var(--card);border:1px solid var(--line);display:grid;place-items:center;transition:.4s}
+.stage svg{width:78%;filter:drop-shadow(0 20px 40px hsl(var(--h) 90% 50%/.5))}
+.read{position:absolute;top:18px;left:22px;font-size:46px;font-weight:700;letter-spacing:-2px}
+.read small{font-size:15px;font-weight:400;display:block;letter-spacing:0;color:var(--mu)}
+input[type=range]{width:100%;accent-color:hsl(var(--h) 95% 55%);margin:18px 0}
+.btn{display:inline-block;padding:14px 26px;border-radius:99px;background:var(--fg);color:var(--bg);text-decoration:none;font-weight:700;border:0;cursor:pointer;font:inherit;font-weight:700}
+.btn.g{background:transparent;color:var(--fg);border:1.5px solid var(--fg)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:26px;padding:26px;transition:.3s}
+.card:hover{transform:translateY(-6px) rotate(-.6deg);border-color:var(--hot)}
+.card .n{font-size:44px;font-weight:700;background:linear-gradient(90deg,var(--hot),var(--cold));-webkit-background-clip:text;background-clip:text;color:transparent}
+.av{width:96px;height:96px;border-radius:32px;display:grid;place-items:center;font-size:32px;font-weight:700;color:#fff;background:linear-gradient(135deg,var(--hot),var(--cold));margin-bottom:12px}
+.bar{height:14px;border-radius:9px;background:var(--line);overflow:hidden;margin:10px 0 30px}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--cold),var(--hot));transition:width 1s}
+.tl{border-left:3px solid var(--line);margin-left:10px;padding-left:28px}
+.ms{position:relative;margin-bottom:22px}
+.ms:before{content:"";position:absolute;left:-40px;top:6px;width:20px;height:20px;border-radius:50%;background:var(--bg);border:3px solid var(--mu)}
+.ms.s1:before{border-color:var(--cold);animation:p 1.6s infinite}
+.ms.s2:before{background:var(--hot);border-color:var(--hot)}
+@keyframes p{50%{box-shadow:0 0 0 9px #12b8e833}}
+.tag{font-size:12px;padding:3px 10px;border-radius:99px;border:1px solid var(--line);color:var(--mu)}
+.steps{counter-reset:s}.steps .card:before{counter-increment:s;content:"0" counter(s);font-size:14px;color:var(--hot);font-weight:700}
+.ad input,.ad textarea,.ad select{width:100%;padding:10px 12px;margin:4px 0 10px;border-radius:12px;border:1px solid var(--line);background:var(--bg);color:var(--fg);font:inherit}
+.ad .row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.sv{position:sticky;bottom:calc(10px + env(safe-area-inset-bottom,0px));display:flex;gap:10px;align-items:center;background:var(--card);border:1px solid var(--line);padding:12px 16px;border-radius:99px;margin-top:20px}
+.ov{position:fixed;inset:0;z-index:50;display:grid;place-items:center;padding:20px;background:rgba(8,9,16,.55);backdrop-filter:blur(10px);animation:fd .3s}
+@keyframes fd{from{opacity:0}}
+.pop{position:relative;width:min(880px,100%);max-height:calc(100% - 20px);overflow:auto;display:grid;grid-template-columns:1fr 1.2fr;border-radius:34px;padding:2px;background:linear-gradient(135deg,var(--cold),var(--hot));animation:pp .5s cubic-bezier(.2,1.3,.4,1)}
+@keyframes pp{from{opacity:0;transform:translateY(40px) scale(.92)}}
+.pop>div{background:var(--card);padding:30px}
+.pop>div:first-child{border-radius:32px 0 0 32px;display:grid;place-items:center;background:radial-gradient(circle at 50% 50%,#ff5a3655,transparent 60%),radial-gradient(circle at 20% 80%,#12b8e855,transparent 55%),var(--card)}
+.pop>div:last-child{border-radius:0 32px 32px 0}
+@media(max-width:700px){.pop{grid-template-columns:1fr}.pop>div:first-child{border-radius:32px 32px 0 0}.pop>div:last-child{border-radius:0 0 32px 32px}.pop svg{max-width:200px}}
+.pop h3{font-size:32px;letter-spacing:-1px;margin:.3em 0}
+.pop ul{list-style:none;padding:0;margin:18px 0 0;display:grid;gap:10px}
+.pop li{display:flex;gap:12px;align-items:center;padding:10px 14px;border-radius:16px;background:var(--bg);border:1px solid var(--line)}
+.pop li:before{content:"";flex:none;width:12px;height:12px;border-radius:50%;background:linear-gradient(135deg,var(--cold),var(--hot))}
+.x{position:absolute;top:14px;right:16px;z-index:2;width:38px;height:38px;border-radius:50%;border:0;background:var(--fg);color:var(--bg);font-size:18px;cursor:pointer}
+@keyframes gl{50%{box-shadow:0 0 70px #ff5a3655,0 0 70px #12b8e855}}
+.vault{max-width:520px;margin:60px auto;text-align:center;padding:40px 28px;border-radius:36px;background:var(--card);border:1.5px solid transparent;background-image:linear-gradient(var(--card),var(--card)),linear-gradient(135deg,var(--cold),var(--hot));background-origin:border-box;background-clip:padding-box,border-box;animation:gl 4s infinite}
+.vault .lk{font-size:56px}
+.kin{width:100%;text-align:center;font:700 24px/1 ui-monospace,Menlo,monospace;letter-spacing:3px;padding:16px;border-radius:18px;border:1px solid var(--line);background:var(--bg);color:var(--fg);text-transform:uppercase;margin:18px 0 12px}
+.nk{font:700 clamp(22px,5vw,34px)/1.2 ui-monospace,Menlo,monospace;letter-spacing:2px;padding:20px;border-radius:20px;background:var(--bg);border:2px dashed var(--hot);word-break:break-all;margin:14px 0}
+.er{color:var(--hot);min-height:24px}
+@keyframes up{from{transform:translateY(115%) rotate(6deg);filter:blur(10px);opacity:0}}
+@keyframes sw{to{width:min(440px,72vw)}}
+@keyframes dr{0%,100%{transform:translate(-8%,-4%) scale(1)}50%{transform:translate(8%,6%) scale(1.25)}}
+@keyframes sh{from{opacity:0;transform:translateY(8px)}}
+.intro{position:fixed;inset:0;z-index:100;display:grid;place-content:center;justify-items:center;text-align:center;background:#07080d;color:#fff;overflow:hidden}
+.intro:before,.intro:after{content:"";position:absolute;width:70vmax;height:70vmax;border-radius:50%;filter:blur(90px);opacity:.55;animation:dr 6s ease-in-out infinite}
+.intro:before{background:#12b8e8;left:-30vmax;top:-30vmax}.intro:after{background:#ff5a36;right:-30vmax;bottom:-30vmax;animation-delay:-3s}
+.intro .wl{position:relative;letter-spacing:8px;text-transform:uppercase;font-size:14px;color:#aab;margin:0;animation:sh .8s .1s both}
+.intro .lt{position:relative;display:flex;margin:10px 0 18px;font-size:clamp(40px,12.5vw,130px);letter-spacing:-2px;line-height:1.05;overflow:hidden;padding:0 4px}
+.intro .lt span{display:inline-block;animation:up .9s cubic-bezier(.2,.9,.2,1) both}
+.intro .sw{position:relative;height:5px;width:0;border-radius:9px;background:linear-gradient(90deg,#12b8e8,#ff5a36);animation:sw 1.8s .9s cubic-bezier(.3,.8,.3,1) forwards}
+.intro .tg{position:relative;margin-top:18px;color:#aab;animation:sh .8s 2.1s both}
+.intro button{position:absolute;bottom:calc(24px + env(safe-area-inset-bottom,0px));right:24px;background:none;border:1px solid #556;color:#aab;border-radius:99px;padding:8px 16px;cursor:pointer;font:inherit;font-size:14px}
+.intro.out{opacity:0;transform:scale(1.1);transition:.7s;pointer-events:none}
+.gw{position:fixed;inset:0;z-index:90;display:grid;place-items:center;padding:20px;overflow:auto;background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(16px);animation:fd .5s}
+.gw .vault{margin:0;width:min(520px,100%)}
+.gw.out{opacity:0;transition:.5s;pointer-events:none}
+.lgbg{position:fixed;inset:0;z-index:90;display:grid;place-items:center;padding:60px 20px 20px;overflow:auto;background:linear-gradient(180deg,hsl(var(--h) 90% 58%) 0,hsl(200 75% 30%) 60%,hsl(215 70% 14%) 100%);transition:background .4s;animation:fd .5s}
+.lgbg.out{opacity:0;transition:.5s;pointer-events:none}
+.lgw{display:flex;gap:38px;align-items:center;justify-content:center;flex-wrap:wrap;width:100%}
+.lgc{position:relative;width:min(400px,100%);background:var(--card);color:var(--fg);border-radius:26px;padding:58px 28px 24px;text-align:center;box-shadow:0 30px 80px #0006}
+.lgc h2{margin:0 0 4px;font-size:30px;letter-spacing:-1px}
+.lgc label{display:block;text-align:left;font-size:14px;font-weight:500;margin-top:14px}
+.lgc input{width:100%;margin-top:6px;padding:13px 14px;border-radius:12px;border:1px solid var(--line);background:var(--bg);color:var(--fg);font:inherit}
+.bdg{position:absolute;top:-44px;left:50%;transform:translateX(-50%);width:88px;height:88px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#12b8e8,#ff5a36);padding:5px}
+.bdg>div{width:100%;height:100%;border-radius:50%;background:#10131c;display:grid;place-items:center}
+.pw{position:relative;display:block}.pw a{position:absolute;right:12px;top:50%;transform:translateY(-35%);font-size:13px;color:var(--mu);cursor:pointer}
+.lgb{width:100%;margin-top:14px;padding:14px;border:0;border-radius:12px;color:#fff;font:700 16px inherit;font-family:inherit;cursor:pointer;background:linear-gradient(90deg,#12b8e8,#ff5a36)}
+.lgc .sm{font-size:14px;margin:14px 0 0}.lgc a[role=button]{color:var(--cold);cursor:pointer;font-weight:700}
+.rail{display:flex;align-items:center;gap:16px;color:#fff}
+.rl{display:flex;flex-direction:column;align-items:center;gap:8px;padding:16px 10px;border-radius:40px;background:#ffffff2e;backdrop-filter:blur(10px);border:1px solid #ffffff59;font-size:20px}
+.rl input{writing-mode:vertical-lr;direction:rtl;height:210px;width:26px;accent-color:#fff}
+.rd small{display:block;opacity:.8}.rd b{font-size:34px;letter-spacing:-1px}
+@media(max-width:820px){.rail{flex-direction:row}.rl{flex-direction:row;border-radius:40px}.rl input{writing-mode:horizontal-tb;direction:ltr;height:26px;width:170px}}
+footer{padding:30px 5vw;text-align:center;color:var(--mu);border-top:1px solid var(--line)}
+</style>
+</head>
+<body>
+<nav id="nav"></nav>
+<main id="app"></main>
+<div id="modal"></div>
+<div id="gate"></div>
+<footer>© Temprion — thermal control, solid-state. </footer>
+<script type="application/json" id="data">{"tag":"Hot. Cold. Handled.","about":"Temprion builds compact, solid-state thermal devices. Using a Peltier module, our device holds a small enclosed space at exactly the temperature you choose — no compressor, no coolant, no noise.","ptitle":"Meet the Temprion device","pdesc":"A compact thermal device that uses a Peltier module to hold the temperature inside a small, confined space exactly where you want it.","ppoints":"Peltier thermoelectric module — no compressor, no coolant\nHeats and cools by reversing the current\nBuilt for small, confined spaces\nSensor-driven control holds your target temperature\nSilent, solid-state operation","mission":"Make precise temperature control small, silent and available to everyone — from a student's lab shelf to a medicine box on a long journey.","team":[{"n":"Madhav Nair S ","r":"Founder & CEO"},{"n":"Mathew R Manjooran","r":"CFO"},{"n":"Siya Zaan","r":"CMO"},{"n":"Aditya Rajhans","r":"CTO"},{"n":"Diwakar ","r":"CTO"},{"n":"Lakshya ","r":"CTO "},{"n":"Amrutha ","r":"Documentation lead "},{"n":"P.S Maanas","r":"Advisor for internal affairs "}],"ach":[{"y":"2026","t":"Working on the  prototype","d":"First Peltier-based unit holding a small enclosure at target temperature."}],"ms":[{"t":"Idea & research","d":"Peltier thermal modelling and feasibility.","s":2},{"t":"Working prototype","d":"First functional unit for confined spaces.","s":0},{"t":"Testing & refinement","d":"Stability, efficiency and heat-sink tuning.","s":1},{"t":"Pilot users","d":"Hands-on feedback from early customers.","s":0},{"t":"Manufacturing run","d":"First small production batch.","s":0},{"t":"Public launch","d":"Temprion goes on sale.","s":0}]}</script>
+<script>
+let ok=false,isOwn=false,uid='',db=null;try{ok=sessionStorage.getItem('tp_ok')=='1'}catch(e){}
+let usr=null;try{usr=JSON.parse(localStorage.getItem('tp_user'))}catch(e){}
+let unsub=null,who='';try{who=sessionStorage.getItem('tp_who')||''}catch(e){}
+const norm=k=>String(k).toUpperCase().replace(/[^A-Z0-9]/g,''),sha=async t=>[...new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(t)))].map(b=>b.toString(16).padStart(2,'0')).join('');
+async function redeem(k,nm){try{nm=String(nm||'').trim();if(nm.length<2)return 'Please enter your name.';if(!db)return 'Sign in to claude.ai to use a pass key.';k=norm(k);if(k.length<8)return 'Enter your full pass key.';const r=db.doc('keys/'+await sha(k)),sn=await r.get();if(!sn.exists)return 'Invalid pass key.';const x=sn.data();if(x.used)return 'This pass key was already used.';if(Date.now()>x.exp)return 'This pass key has expired.';const l=await r.acquire({holder:uid||'x',ttlMs:30000});if(!l.acquired)return 'This key is being used right now.';await r.update({used:true,by:uid,name:nm.slice(0,60),at:Date.now()});ok=true;who=nm.slice(0,60);try{sessionStorage.setItem('tp_ok','1');sessionStorage.setItem('tp_who',who)}catch(e){}return ''}catch(e){return 'Could not verify the key.'}}
+async function mkKey(lbl,mins){const A='ABCDEFGHJKLMNPQRSTUVWXYZ23456789',b=crypto.getRandomValues(new Uint8Array(12)),c=[...b].map(x=>A[x%A.length]).join(''),k='TMP-'+c.slice(0,4)+'-'+c.slice(4,8)+'-'+c.slice(8);await db.doc('keys/'+await sha(norm(k))).set({label:lbl||'Unnamed',c:Date.now(),exp:Date.now()+mins*60000,used:false});return k}
+let D=JSON.parse(document.getElementById('data').textContent),dirty=false,canEdit=false,art=null;
+const $=s=>document.querySelector(s),esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const pages={home:'Home',product:'Product',story:'Our Story',wins:'Achievements',road:'Milestones'};
+const dev=()=>`<svg viewBox="0 0 300 300" aria-label="Temprion device"><defs><linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="#12b8e8"/><stop offset="1" stop-color="#ff5a36"/></linearGradient></defs><rect x="40" y="70" width="220" height="170" rx="34" fill="#1b1d2b"/><rect x="40" y="70" width="220" height="170" rx="34" fill="none" stroke="url(#g)" stroke-width="5"/><rect x="62" y="92" width="86" height="126" rx="18" fill="#12b8e8" opacity=".85"/><rect x="152" y="92" width="86" height="126" rx="18" fill="#ff5a36" opacity=".85"/><g stroke="#fff" stroke-width="3" opacity=".6">${[0,1,2,3,4].map(i=>`<line x1="${162+i*14}" y1="104" x2="${162+i*14}" y2="206"/>`).join('')}</g><circle cx="105" cy="155" r="20" fill="#fff" opacity=".9"/><text x="150" y="56" text-anchor="middle" font-size="22" font-weight="700" fill="url(#g)">TEMPRION</text><rect x="110" y="240" width="80" height="14" rx="7" fill="#1b1d2b"/></svg>`;
+const hdr=(k,t,s)=>`<p class="tag" style="display:inline-block;margin-top:40px">${k}</p><h1 style="font-size:clamp(40px,7vw,84px)">${t}</h1><p class="mu" style="max-width:640px;font-size:20px">${s}</p>`;
+const V={
+home:()=>`<section class="hero"><div><p class="tag" style="display:inline-block">Peltier-powered climate for tiny spaces</p><h1>${esc(D.tag).replace(/(Handled\.?)/,'<em>$1</em>')}</h1><p class="mu" style="font-size:20px;max-width:520px">${esc(D.about)}</p><p style="margin-top:26px"><a class="btn" href="#/product">See how it works</a> <button class="btn g" onclick="openInfo()">✦ Product info</button></p></div>
+<div><div class="stage"><div class="read"><span id="tv">22</span>°C<small>drag to set the temperature</small></div>${dev()}</div><input type="range" id="sl" min="-10" max="60" value="22" aria-label="Temperature"></div></section>
+<h2>Why Temprion?</h2><div class="grid">${[['0','moving compressors. A Peltier module moves heat with electricity alone.'],['2-way','One device. Cool it down or warm it up by flipping current direction.'],['Tiny','Built for confined spaces where a normal cooler simply will not fit.']].map(x=>`<div class="card"><div class="n">${x[0]}</div><p>${x[1]}</p></div>`).join('')}</div>`,
+product:()=>hdr('The product','A tiny climate you control.','Temprion is a device that uses a Peltier module to regulate the temperature inside a small, confined space.')+`<h2>How it works</h2><div class="grid steps">${[['Sense','A sensor reads the temperature inside the chamber, continuously.'],['Decide','The controller compares it to your target and picks heating or cooling.'],['Pump heat','Current flows through the Peltier module — one face gets cold, the other hot. Reverse it to flip.'],['Hold','Output is tuned in real time so the temperature stays steady.']].map(x=>`<div class="card"><h3>${x[0]}</h3><p class="mu">${x[1]}</p></div>`).join('')}</div><h2>Where it fits</h2><div class="grid">${['Medicine & insulin storage','Lab samples & electronics testing','Compact food & beverage chilling','Cosmetics & skincare storage'].map(x=>`<div class="card"><p style="font-size:20px;font-weight:500;margin:0">${x}</p></div>`).join('')}</div><p style="margin-top:30px"><button class="btn g" onclick="openInfo()">✦ Product info</button> <a class="btn" href="#/story">Meet the team →</a></p>`,
+story:()=>hdr('Company','The soul of Temprion.',esc(D.about))+`<div class="card" style="margin-top:30px"><span class="tag">Mission</span><p style="font-size:24px;margin:.4em 0 0">${esc(D.mission)}</p></div><h2>The administrative body</h2><div class="grid">${D.team.map(m=>`<div class="card">${m.img?`<img class="av" src="${m.img}" alt="${esc(m.n)}" style="object-fit:cover">`:`<div class="av">${esc(m.n).slice(0,1)}</div>`}<h3 style="margin:0">${esc(m.n)}</h3><span class="tag">${esc(m.r)}</span></div>`).join('')}</div>`,
+wins:()=>hdr('Achievements','Proof, not promises.','Milestones we have actually crossed.')+`<div class="grid" style="margin-top:30px">${D.ach.map(a=>`<div class="card"><div class="n">${esc(a.y)}</div><h3>${esc(a.t)}</h3><p class="mu">${esc(a.d)}</p></div>`).join('')}</div>`,
+road:()=>{const n=D.ms.length,p=Math.round(D.ms.reduce((a,m)=>a+(m.s==2?1:m.s==1?.5:0),0)/n*100),L=['Planned','In progress','Done ✓'];return hdr('Milestone tracker','Where we are right now.','Live progress, straight from the team.')+`<h2 style="margin-top:30px">${p}% of the way</h2><div class="bar"><i style="width:${p}%"></i></div><div class="tl">${D.ms.map(m=>`<div class="ms s${m.s}"><span class="tag">${L[m.s]}</span><h3 style="margin:6px 0 0">${esc(m.t)}</h3><p class="mu" style="margin:0">${esc(m.d)}</p></div>`).join('')}</div>`},
+keys:()=>{if(!isOwn)return hdr('Keys','Owner only.','Only the site owner can generate pass keys.');return hdr('Key vault','One-time pass keys.','Generate a key, share it privately with one person, and it stops working after a single use.')+`<div class="card ad" style="margin-top:30px"><div class="row"><label style="flex:2;min-width:180px">Who is it for?<input id="kl" placeholder="e.g. Aditya"></label><label style="flex:1;min-width:140px">Valid for<select id="kv"><option value="10">10 minutes</option><option value="60" selected>1 hour</option><option value="1440">24 hours</option></select></label></div><button class="btn" id="kg">Generate key</button><div id="nk"></div></div><h2>All keys</h2><div id="kls" class="grid"></div>`},
+admin:()=>{if(!canEdit)return hdr('Admin','Restricted.','The admin area is for approved editors only. Sign in to claude.ai with an account that has edit access.');
+if(!ok&&!isOwn)return `<div class="vault"><div class="lk">🔐</div><h2 style="margin:.2em 0">Admin login</h2><p class="mu">Enter your name and the one-time pass key you were given. The key works once.</p><input class="kin" id="kn" style="text-transform:none;letter-spacing:0;font-family:inherit" placeholder="Your full name" autocomplete="name"><input class="kin" id="kk" style="margin-top:0" placeholder="TMP-XXXX-XXXX-XXXX" autocomplete="off"><div class="er" id="ke"></div><button class="btn" id="ku">Verify & log in</button></div>`;
+const f=(k,l,v,t)=>`<label>${l}${t?`<textarea rows="3" data-k="${k}">${esc(v)}</textarea>`:`<input data-k="${k}" value="${esc(v)}">`}</label>`;
+const list=(key,rows,flds)=>rows.map((r,i)=>`<div class="card" style="margin-bottom:12px"><div class="row">${flds.map(([k,l])=>`<label style="flex:1;min-width:140px">${l}<input data-l="${key}" data-i="${i}" data-f="${k}" value="${esc(r[k])}"></label>`).join('')}${key=='ms'?`<label>Status<select data-l="ms" data-i="${i}" data-f="s">${['Planned','In progress','Done'].map((x,j)=>`<option value="${j}" ${r.s==j?'selected':''}>${x}</option>`).join('')}</select></label>`:''}${key=='team'?`<div class="row">${r.img?`<img src="${r.img}" alt="" style="width:48px;height:48px;border-radius:14px;object-fit:cover">`:''}<label class="btn g" style="cursor:pointer;padding:8px 14px">${r.img?'Change':'Add'} photo<input type="file" accept="image/*" data-img="${i}" hidden></label>${r.img?`<button class="btn g" style="padding:8px 14px" data-rmimg="${i}">Remove photo</button>`:''}</div>`:''}<button class="btn g" data-del="${key}:${i}">Delete</button></div></div>`).join('')+`<button class="btn g" data-add="${key}">+ Add</button>`;
+return hdr('Admin','Edit your site.','Change anything, then press Publish — the live site updates for everyone.')+`<div class="ad"><h2>Company</h2>${f('tag','Headline',D.tag)}${f('about','About',D.about,1)}${f('mission','Mission',D.mission,1)}<h2>Product popup</h2>${f('ptitle','Popup title',D.ptitle)}${f('pdesc','Description',D.pdesc,1)}${f('ppoints','Highlights (one per line)',D.ppoints,1)}<h2>Team</h2>${list('team',D.team,[['n','Name'],['r','Role']])}<h2>Achievements</h2>${list('ach',D.ach,[['y','Year'],['t','Title'],['d','Details']])}<h2>Milestones</h2>${list('ms',D.ms,[['t','Title'],['d','Details']])}<div class="sv"><button class="btn" id="pub">Publish changes</button><span id="st" class="mu">No unsaved changes</span>${who?`<span class="tag">Logged in: ${esc(who)}</span>`:''}<button class="btn g" id="lkb" style="padding:8px 14px;margin-left:auto">🔒 Log out</button></div></div>`}};
+function render(keep){if(unsub){unsub();unsub=null}let r=(location.hash.replace('#/','')||'home');if(!V[r]||r=='admin'||r=='keys')r='home';
+$('#nav').innerHTML='<b>temprion</b>'+Object.entries(pages).map(([k,v])=>`<a href="#/${k}" class="${r==k?'on':''}">${v}</a>`).join('')+(canEdit?`<a href="#/admin" class="${r=='admin'?'on':''}">⚙ Admin</a>`:'')+(isOwn?`<a href="#/keys" class="${r=='keys'?'on':''}">🔑 Keys</a>`:'')+(usr?`<a role="button" id="so" style="cursor:pointer">👋 ${esc(String(usr.n).split(' ')[0])} · switch</a>`:'');
+{const so=$('#so');if(so)so.onclick=signOut}$('#app').innerHTML=V[r]();if(!keep)window.scrollTo(0,0);
+const sl=$('#sl');if(sl){const u=()=>{const t=+sl.value;$('#tv').textContent=t;document.documentElement.style.setProperty('--h',Math.round(200-(t+10)/70*190))};sl.oninput=u;u()}
+if(r=='admin'&&canEdit&&(ok||isOwn))wire();if(r=='admin'&&canEdit&&!ok&&!isOwn)gate();if(r=='keys'&&isOwn)keysWire()}
+function openInfo(){$('#modal').innerHTML=`<div class="ov" onclick="if(event.target===this)closeInfo()"><div class="pop" role="dialog" aria-modal="true"><button class="x" onclick="closeInfo()" aria-label="Close">✕</button><div>${dev()}</div><div><span class="tag">The product</span><h3>${esc(D.ptitle)}</h3><p class="mu">${esc(D.pdesc)}</p><ul>${String(D.ppoints||'').split('\n').filter(Boolean).map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div></div></div>`}
+function closeInfo(){$('#modal').innerHTML=''}
+addEventListener('keydown',e=>{if(e.key==='Escape')closeInfo()});
+function gate(){const g=async()=>{$('#ke').textContent='Checking…';const m=await redeem($('#kk').value,$('#kn').value);if(m)$('#ke').textContent=m;else render()};$('#ku').onclick=g;$('#kn').onkeydown=$('#kk').onkeydown=e=>{if(e.key=='Enter')g()}}
+function keysWire(){if(!db){$('#kls').innerHTML='<p class="mu">Database unavailable.</p>';return}
+$('#kg').onclick=async()=>{try{const k=await mkKey($('#kl').value.trim(),+$('#kv').value);$('#nk').innerHTML=`<p class="mu" style="margin:14px 0 0">Copy it now — it is shown only once:</p><div class="nk">${k}</div><button class="btn g" id="cp">Copy key</button>`;$('#cp').onclick=()=>navigator.clipboard&&navigator.clipboard.writeText(k);$('#kl').value=''}catch(e){$('#nk').textContent='Could not create a key.'}};
+unsub=db.collection('keys').orderBy('c','desc').onSnapshot(sn=>{const t=Date.now(),el=$('#kls');if(!el)return;el.innerHTML=sn.docs.map(d=>{const x=d.data(),st=x.used?'Used':t>x.exp?'Expired':'Active';return `<div class="card"><span class="tag">${st}</span><h3 style="margin:8px 0 2px">${esc(x.label)}</h3><p class="mu" style="margin:0 0 10px;font-size:14px">${x.used?'Used by '+esc(x.name||'unknown')+' · '+new Date(x.at).toLocaleString():'Expires '+new Date(x.exp).toLocaleString()}</p><button class="btn g" style="padding:8px 14px" data-rv="${d.id}">Delete</button></div>`}).join('')||'<p class="mu">No keys yet.</p>';el.querySelectorAll('[data-rv]').forEach(b=>b.onclick=()=>db.doc('keys/'+b.dataset.rv).delete())})}
+function mark(){dirty=true;$('#st').textContent='Unsaved changes'}
+function wire(){const A=$('#app');
+A.querySelectorAll('[data-k]').forEach(e=>e.oninput=()=>{D[e.dataset.k]=e.value;mark()});
+A.querySelectorAll('[data-l]').forEach(e=>e.oninput=()=>{D[e.dataset.l][e.dataset.i][e.dataset.f]=e.dataset.f=='s'?+e.value:e.value;mark()});
+A.querySelectorAll('[data-del]').forEach(e=>e.onclick=()=>{const[k,i]=e.dataset.del.split(':');D[k].splice(+i,1);render(1);mark()});
+A.querySelectorAll('[data-add]').forEach(e=>e.onclick=()=>{const k=e.dataset.add;D[k].push(k=='team'?{n:'New person',r:'Role'}:k=='ach'?{y:'2026',t:'New achievement',d:''}:{t:'New milestone',d:'',s:0});render(1);mark()});
+A.querySelectorAll('[data-img]').forEach(e=>e.onchange=()=>{const f=e.files[0];if(!f)return;const im=new Image(),u=URL.createObjectURL(f);im.onload=()=>{const S=256,c=document.createElement('canvas');c.width=c.height=S;const m=Math.min(im.width,im.height);c.getContext('2d').drawImage(im,(im.width-m)/2,(im.height-m)/2,m,m,0,0,S,S);D.team[+e.dataset.img].img=c.toDataURL('image/jpeg',.82);URL.revokeObjectURL(u);render(1);mark()};im.src=u});
+A.querySelectorAll('[data-rmimg]').forEach(e=>e.onclick=()=>{delete D.team[+e.dataset.rmimg].img;render(1);mark()});
+$('#lkb').onclick=()=>{ok=false;who='';try{sessionStorage.removeItem('tp_ok');sessionStorage.removeItem('tp_who')}catch(e){}render()};
+$('#pub').onclick=async()=>{if(!art)return $('#st').textContent='Publishing unavailable here';$('#st').textContent='Publishing…';
+try{const c=document.documentElement.cloneNode(true);c.querySelector('#app').innerHTML='';c.querySelector('#nav').innerHTML='';c.querySelector('#modal').innerHTML='';c.querySelector('#gate').innerHTML='';c.querySelector('#data').textContent=JSON.stringify(D).replace(/</g,'\\u003c');
+await art.publish('<!doctype html>\n'+c.outerHTML)}catch(e){$('#st').textContent='Could not publish: '+(e.code||e.message)}}}
+function lock(on){document.body.style.overflow=on?'hidden':''}
+function closeGate(){const g=$('#gate').firstElementChild;if(!g)return lock(0);g.classList.add('out');setTimeout(()=>{$('#gate').innerHTML='';lock(0)},550)}
+function signOut(){try{localStorage.removeItem('tp_user')}catch(e){}usr=null;render(1);showLogin()}
+const railH=()=>`<div class="rail"><div class="rl"><span>☀️</span><input type="range" id="rg" min="-10" max="60" value="22" aria-label="Temperature"><span>❄️</span></div><div class="rd"><small>Temperature</small><b id="rv">22°C</b><small>Optimal 22°C</small></div></div>`;
+const railB=()=>{const r=$('#rg');if(r)r.oninput=()=>{const t=+r.value;document.documentElement.style.setProperty('--h',Math.round(200-(t+10)/70*190));$('#rv').textContent=t+'°C'}};
+const badge=`<div class="bdg"><div><svg viewBox="0 0 40 40" width="38" height="38"><path d="M20 7v17" stroke="#fff" stroke-width="4" stroke-linecap="round" fill="none"/><circle cx="20" cy="28" r="6" fill="#ff5a36"/></svg></div></div>`;
+function showLogin(m){m=m||'in';lock(1);const up=m=='up';
+$('#gate').innerHTML=`<div class="lgbg"><div class="lgw"><div class="lgc">${badge}<h2>${up?'Create account':'Welcome back'}</h2><p class="mu" style="margin:0">${up?'Join Temprion in a few seconds':'Log in to enter Temprion'}</p>${up?'<label>Your name<input id="ln" autocomplete="name" placeholder="Your name"></label>':''}<label>Email address<input id="le" type="email" placeholder="name@company.com" autocomplete="email"></label><label>Password<span class="pw"><input id="lp" type="password" placeholder="At least 6 characters" autocomplete="${up?'new-password':'current-password'}"><a role="button" id="ls">Show</a></span></label><div class="er" id="lr"></div><button class="lgb" id="lb">${up?'Sign up':'Sign in'}</button><p class="mu sm">${up?'Already have an account?':'Don’t have an account?'} <a role="button" id="lt">${up?'Sign in':'Sign up'}</a></p><p class="mu sm" style="font-size:12px">Accounts are saved in this browser only.</p></div>${railH()}</div></div>`;
+railB();const err=t=>{$('#lr').textContent=t};
+$('#ls').onclick=()=>{const p=$('#lp'),h=p.type=='password';p.type=h?'text':'password';$('#ls').textContent=h?'Hide':'Show'};
+$('#lt').onclick=()=>showLogin(up?'in':'up');
+const go=async()=>{const e=$('#le').value.trim().toLowerCase(),p=$('#lp').value,n=up?$('#ln').value.trim():'';
+if(up&&n.length<2)return err('Please enter your name.');
+if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(e))return err('Please enter a valid email.');
+if(p.length<6)return err('Password must be at least 6 characters.');
+let A={};try{A=JSON.parse(localStorage.getItem('tp_acc')||'{}')}catch(x){}
+if(up){if(A[e])return err('Account exists — please sign in.');const s=[...crypto.getRandomValues(new Uint32Array(2))].join('-');A[e]={n:n.slice(0,60),s,h:await sha(s+p)};usr={n:A[e].n,e}}
+else{const a=A[e];if(!a)return err('No account here yet — please sign up.');if(a.h!==await sha(a.s+p))return err('Wrong email or password.');usr={n:a.n,e}}
+try{localStorage.setItem('tp_acc',JSON.stringify(A));localStorage.setItem('tp_user',JSON.stringify(usr))}catch(x){}closeGate();render(1)};
+$('#lb').onclick=go;$('#lp').onkeydown=ev=>{if(ev.key=='Enter')go()};setTimeout(()=>{const f=$('#ln')||$('#le');f&&f.focus()},300)}
+function showIntro(done){lock(1);const L=[...'TEMPRION'].map((c,i)=>`<span style="animation-delay:${.35+i*.11}s;color:hsl(${200-i*27} 95% 60%)">${c}</span>`).join('');
+$('#gate').innerHTML=`<div class="intro"><p class="wl">Welcome to</p><h1 class="lt" aria-label="Temprion">${L}</h1><div class="sw"></div><p class="tg">${esc(D.tag)}</p><button id="sk">Skip</button></div>`;
+let fin=0;const end=()=>{if(fin)return;fin=1;const i=$('#gate').firstElementChild;if(i)i.classList.add('out');setTimeout(()=>{$('#gate').innerHTML='';lock(0);done()},650)};$('#sk').onclick=end;setTimeout(end,4300)}
+function start(){const after=()=>{if(!usr)showLogin()};let seen=0;try{seen=sessionStorage.getItem('tp_intro')}catch(e){}
+if(seen||matchMedia('(prefers-reduced-motion: reduce)').matches){after();return}try{sessionStorage.setItem('tp_intro','1')}catch(e){}showIntro(after)}
+addEventListener('hashchange',()=>render());render();start();
+fetch('/api/content').then(r=>r.ok?r.json():null).then(j=>{if(j&&j.tag&&Array.isArray(j.team)){D=j;render(1)}}).catch(()=>{});
+</script>
+
+
+</body></html>

@@ -1,0 +1,13 @@
+{
+  "name": "temprion-node",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Temprion website + admin + backend as one plain Node.js app (no framework, no dependencies)",
+  "main": "server.js",
+  "engines": { "node": ">=20.6" },
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --env-file=.env server.js",
+    "test": "node test/test.js"
+  }
+}

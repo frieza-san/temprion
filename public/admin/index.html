@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Temprion Admin</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--bg:#f6f4ef;--fg:#12131a;--mu:#5d6070;--card:#fff;--line:#e0ddd4;--hot:#ff5a36;--cold:#12b8e8;--h:20}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0b0c12;--fg:#f2f1ec;--mu:#9a9db0;--card:#151722;--line:#262a3b}}
+:root[data-theme="dark"]{--bg:#0b0c12;--fg:#f2f1ec;--mu:#9a9db0;--card:#151722;--line:#262a3b}
+html{height:auto}*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:400 16px/1.5 'Space Grotesk',system-ui,sans-serif;overflow-x:hidden}
+@keyframes fd{from{opacity:0}}
+.mu{color:var(--mu)}.er{color:#ff5a36;min-height:22px;font-size:14px}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding:12px 5vw;background:color-mix(in srgb,var(--bg) 80%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.bar b{font-size:20px;letter-spacing:-1px;margin-right:auto;background:linear-gradient(90deg,var(--hot),var(--cold));-webkit-background-clip:text;background-clip:text;color:transparent}
+.tb{padding:6px 14px;border-radius:99px;border:0;background:none;color:var(--fg);font:inherit;cursor:pointer}.tb.on{background:var(--fg);color:var(--bg)}
+.tag{font-size:12px;padding:3px 10px;border-radius:99px;border:1px solid var(--line);color:var(--mu)}
+main{max-width:980px;margin:auto;padding:10px 5vw 100px}
+h1{font-size:clamp(30px,6vw,52px);letter-spacing:-2px;margin:.7em 0 .2em}h2{font-size:26px;letter-spacing:-1px;margin:1.4em 0 .4em}
+.card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:20px;margin-bottom:12px}
+.row{display:flex;gap:10px;align-items:flex-end;flex-wrap:wrap}
+label{display:block;font-size:14px;font-weight:500;margin-top:8px}
+input,textarea,select{width:100%;padding:10px 12px;margin:4px 0 8px;border-radius:12px;border:1px solid var(--line);background:var(--bg);color:var(--fg);font:inherit}
+.b{padding:11px 22px;border-radius:99px;border:0;background:var(--fg);color:var(--bg);font:inherit;font-weight:700;cursor:pointer;display:inline-block}.b.g{background:none;color:var(--fg);border:1.5px solid var(--fg);padding:8px 16px}
+.sv{position:sticky;bottom:calc(10px + env(safe-area-inset-bottom,0px));display:flex;gap:12px;align-items:center;flex-wrap:wrap;background:var(--card);border:1px solid var(--line);padding:12px 18px;border-radius:99px;margin-top:20px}
+.nk{font:700 clamp(20px,5vw,30px)/1.2 ui-monospace,Menlo,monospace;letter-spacing:2px;padding:18px;border-radius:18px;background:var(--bg);border:2px dashed var(--hot);word-break:break-all;margin:12px 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.lgbg{position:fixed;inset:0;z-index:90;display:grid;place-items:center;padding:60px 20px 20px;overflow:auto;background:linear-gradient(180deg,hsl(var(--h) 90% 58%) 0,hsl(200 75% 30%) 60%,hsl(215 70% 14%) 100%);transition:background .4s;animation:fd .5s}
+.lgbg.out{opacity:0;transition:.5s;pointer-events:none}
+.lgw{display:flex;gap:38px;align-items:center;justify-content:center;flex-wrap:wrap;width:100%}
+.lgc{position:relative;width:min(400px,100%);background:var(--card);color:var(--fg);border-radius:26px;padding:58px 28px 24px;text-align:center;box-shadow:0 30px 80px #0006}
+.lgc h2{margin:0 0 4px;font-size:30px;letter-spacing:-1px}
+.lgc label{display:block;text-align:left;font-size:14px;font-weight:500;margin-top:14px}
+.lgc input{width:100%;margin-top:6px;padding:13px 14px;border-radius:12px;border:1px solid var(--line);background:var(--bg);color:var(--fg);font:inherit}
+.bdg{position:absolute;top:-44px;left:50%;transform:translateX(-50%);width:88px;height:88px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#12b8e8,#ff5a36);padding:5px}
+.bdg>div{width:100%;height:100%;border-radius:50%;background:#10131c;display:grid;place-items:center}
+.pw{position:relative;display:block}.pw a{position:absolute;right:12px;top:50%;transform:translateY(-35%);font-size:13px;color:var(--mu);cursor:pointer}
+.lgb{width:100%;margin-top:14px;padding:14px;border:0;border-radius:12px;color:#fff;font:700 16px inherit;font-family:inherit;cursor:pointer;background:linear-gradient(90deg,#12b8e8,#ff5a36)}
+.lgc .sm{font-size:14px;margin:14px 0 0}.lgc a[role=button]{color:var(--cold);cursor:pointer;font-weight:700}
+.rail{display:flex;align-items:center;gap:16px;color:#fff}
+.rl{display:flex;flex-direction:column;align-items:center;gap:8px;padding:16px 10px;border-radius:40px;background:#ffffff2e;backdrop-filter:blur(10px);border:1px solid #ffffff59;font-size:20px}
+.rl input{writing-mode:vertical-lr;direction:rtl;height:210px;width:26px;accent-color:#fff}
+.rd small{display:block;opacity:.8}.rd b{font-size:34px;letter-spacing:-1px}
+@media(max-width:820px){.rail{flex-direction:row}.rl{flex-direction:row;border-radius:40px}.rl input{writing-mode:horizontal-tb;direction:ltr;height:26px;width:170px}}
+
+</style></head><body><div id="app"></div>
+<script>
+let D={"tag": "Hot. Cold. Handled.", "about": "Temprion builds compact, solid-state thermal devices. Using a Peltier module, our device holds a small enclosed space at exactly the temperature you choose — no compressor, no coolant, no noise.", "ptitle": "Meet the Temprion device", "pdesc": "A compact thermal device that uses a Peltier module to hold the temperature inside a small, confined space exactly where you want it.", "ppoints": "Peltier thermoelectric module — no compressor, no coolant\nHeats and cools by reversing the current\nBuilt for small, confined spaces\nSensor-driven control holds your target temperature\nSilent, solid-state operation", "mission": "Make precise temperature control small, silent and available to everyone — from a student's lab shelf to a medicine box on a long journey.", "team": [{"n": "Madhav Nair S ", "r": "Founder & CEO"}, {"n": "Mathew R Manjooran", "r": "CFO"}, {"n": "Siya Zaan", "r": "CMO"}, {"n": "Aditya Rajhans", "r": "CTO"}, {"n": "Diwakar ", "r": "CTO"}, {"n": "Lakshya ", "r": "CTO "}, {"n": "Amrutha ", "r": "Documentation lead "}, {"n": "P.S Maanas", "r": "Advisor for internal affairs "}], "ach": [{"y": "2026", "t": "Working on the  prototype", "d": "First Peltier-based unit holding a small enclosure at target temperature."}], "ms": [{"t": "Idea & research", "d": "Peltier thermal modelling and feasibility.", "s": 2}, {"t": "Working prototype", "d": "First functional unit for confined spaces.", "s": 0}, {"t": "Testing & refinement", "d": "Stability, efficiency and heat-sink tuning.", "s": 1}, {"t": "Pilot users", "d": "Hands-on feedback from early customers.", "s": 0}, {"t": "Manufacturing run", "d": "First small production batch.", "s": 0}, {"t": "Public launch", "d": "Temprion goes on sale.", "s": 0}]},tk=null,role='',who='',tab='c',own=false,meta='';
+try{const s=JSON.parse(sessionStorage.getItem('ta')||'null');if(s){tk=s.t;role=s.r;who=s.n}}catch(e){}
+const $=s=>document.querySelector(s),esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const railH=()=>`<div class="rail"><div class="rl"><span>☀️</span><input type="range" id="rg" min="-10" max="60" value="22" aria-label="Temperature"><span>❄️</span></div><div class="rd"><small>Temperature</small><b id="rv">22°C</b><small>Optimal 22°C</small></div></div>`;
+const railB=()=>{const r=$('#rg');if(r)r.oninput=()=>{const t=+r.value;document.documentElement.style.setProperty('--h',Math.round(200-(t+10)/70*190));$('#rv').textContent=t+'°C'}};
+const badge=`<div class="bdg"><div><svg viewBox="0 0 40 40" width="38" height="38"><path d="M20 7v17" stroke="#fff" stroke-width="4" stroke-linecap="round" fill="none"/><circle cx="20" cy="28" r="6" fill="#ff5a36"/></svg></div></div>`;
+
+async function api(u,b,t){const r=await fetch(u,{method:'POST',headers:{'Content-Type':'application/json',...(t?{Authorization:'Bearer '+t}:{})},body:JSON.stringify(b)});const j=await r.json().catch(()=>({}));if(!r.ok){const e=new Error(j.error||'Something went wrong');e.status=r.status;throw e}return j}
+function logout(){tk=null;try{sessionStorage.removeItem('ta')}catch(e){}render()}
+function login(){document.body.style.overflow='hidden';$('#app').innerHTML=`<div class="lgbg"><div class="lgw"><div class="lgc">${badge}<h2>${own?'Owner sign in':'Admin sign in'}</h2><p class="mu" style="margin:0">${own?'Enter the owner password.':'Enter your name and the one-time pass key you were given.'}</p>${own?'<label>Password<input id="kp" type="password" autocomplete="current-password"></label>':'<label>Your name<input id="kn" autocomplete="name" placeholder="Your full name"></label><label>One-time pass key<input id="kk" placeholder="TMP-XXXX-XXXX-XXXX" autocomplete="off" style="text-transform:uppercase;letter-spacing:2px;font-family:ui-monospace,monospace"></label>'}<div class="er" id="ke"></div><button class="lgb" id="ku">${own?'Sign in':'Verify &amp; log in'}</button><p class="mu sm"><a role="button" id="kt">${own?'Have a pass key instead?':'Site owner? Sign in with password'}</a></p></div>${railH()}</div></div>`;railB();
+$('#kt').onclick=()=>{own=!own;login()};
+const go=async()=>{$('#ke').textContent='Checking…';try{const j=own?await api('/api/auth',{action:'owner',password:$('#kp').value}):await api('/api/auth',{action:'key',name:$('#kn').value,key:$('#kk').value});tk=j.token;role=own?'owner':'editor';who=own?'Owner':$('#kn').value.trim();try{sessionStorage.setItem('ta',JSON.stringify({t:tk,r:role,n:who}))}catch(e){}render()}catch(e){$('#ke').textContent=e.message}};
+$('#ku').onclick=go;document.querySelectorAll('.lgc input').forEach(i=>i.onkeydown=e=>{if(e.key=='Enter')go()})}
+const fld=(k,l,v,t)=>`<label>${l}${t?`<textarea rows="3" data-k="${k}">${esc(v)}</textarea>`:`<input data-k="${k}" value="${esc(v)}">`}</label>`;
+const lst=(key,rows,fl)=>rows.map((r,i)=>`<div class="card"><div class="row">${fl.map(([k,l])=>`<label style="flex:1;min-width:140px">${l}<input data-l="${key}" data-i="${i}" data-f="${k}" value="${esc(r[k])}"></label>`).join('')}${key=='ms'?`<label>Status<select data-l="ms" data-i="${i}" data-f="s">${['Planned','In progress','Done'].map((x,j)=>`<option value="${j}" ${r.s==j?'selected':''}>${x}</option>`).join('')}</select></label>`:''}${key=='team'?`<div class="row">${r.img?`<img src="${r.img}" alt="" style="width:48px;height:48px;border-radius:14px;object-fit:cover">`:''}<label class="b g" style="cursor:pointer;margin:0">${r.img?'Change':'Add'} photo<input type="file" accept="image/*" data-img="${i}" hidden></label>${r.img?`<button class="b g" data-rmimg="${i}">Remove photo</button>`:''}</div>`:''}<button class="b g" data-del="${key}:${i}">Delete</button></div></div>`).join('')+`<button class="b g" data-add="${key}">+ Add</button>`;
+function render(keep){document.body.style.overflow='';if(!tk)return login();const y=scrollY;
+$('#app').innerHTML=`<div class="bar"><b>temprion · admin</b><button class="tb ${tab=='c'?'on':''}" data-t="c">Content</button>${role=='owner'?`<button class="tb ${tab=='k'?'on':''}" data-t="k">Pass keys</button>`:''}<span class="tag">${esc(who)}</span><button class="tb" id="lo">Log out</button></div><main>${role=='owner'&&tab=='k'?kv():cv()}</main>`;
+document.querySelectorAll('[data-t]').forEach(b=>b.onclick=()=>{tab=b.dataset.t;render()});$('#lo').onclick=logout;
+role=='owner'&&tab=='k'?kw():cw();if(keep)scrollTo(0,y)}
+const cv=()=>`<h1>Site content</h1><p class="mu">Changes go live on the website as soon as you publish.</p>
+<h2>Company</h2><div class="card">${fld('tag','Headline',D.tag)}${fld('about','About',D.about,1)}${fld('mission','Mission',D.mission,1)}</div>
+<h2>Product popup</h2><div class="card">${fld('ptitle','Title',D.ptitle)}${fld('pdesc','Description',D.pdesc,1)}${fld('ppoints','Highlights (one per line)',D.ppoints,1)}</div>
+<h2>Team</h2>${lst('team',D.team,[['n','Name'],['r','Role']])}<h2>Achievements</h2>${lst('ach',D.ach,[['y','Year'],['t','Title'],['d','Details']])}<h2>Milestones</h2>${lst('ms',D.ms,[['t','Title'],['d','Details']])}
+<div class="sv"><button class="b" id="sd">Publish changes</button><span id="st" class="mu">${esc(meta)}</span></div>`;
+function cw(){const A=$('#app'),mk=()=>$('#st').textContent='Unpublished changes';
+A.querySelectorAll('[data-k]').forEach(e=>e.oninput=()=>{D[e.dataset.k]=e.value;mk()});
+A.querySelectorAll('[data-l]').forEach(e=>e.oninput=()=>{D[e.dataset.l][e.dataset.i][e.dataset.f]=e.dataset.f=='s'?+e.value:e.value;mk()});
+A.querySelectorAll('[data-del]').forEach(e=>e.onclick=()=>{const[k,i]=e.dataset.del.split(':');D[k].splice(+i,1);render(1);mk()});
+A.querySelectorAll('[data-add]').forEach(e=>e.onclick=()=>{const k=e.dataset.add;D[k].push(k=='team'?{n:'New person',r:'Role'}:k=='ach'?{y:'2026',t:'New achievement',d:''}:{t:'New milestone',d:'',s:0});render(1);mk()});
+A.querySelectorAll('[data-img]').forEach(e=>e.onchange=()=>{const f=e.files[0];if(!f)return;const im=new Image(),u=URL.createObjectURL(f);im.onload=()=>{const S=256,c=document.createElement('canvas');c.width=c.height=S;const m=Math.min(im.width,im.height);c.getContext('2d').drawImage(im,(im.width-m)/2,(im.height-m)/2,m,m,0,0,S,S);D.team[+e.dataset.img].img=c.toDataURL('image/jpeg',.82);URL.revokeObjectURL(u);render(1);mk()};im.src=u});
+A.querySelectorAll('[data-rmimg]').forEach(e=>e.onclick=()=>{delete D.team[+e.dataset.rmimg].img;render(1);mk()});
+$('#sd').onclick=async()=>{$('#st').textContent='Publishing…';try{await api('/api/content',{data:D},tk);meta='Published '+new Date().toLocaleTimeString();$('#st').textContent=meta}catch(e){if(e.status==401)return logout();$('#st').textContent=e.message}}}
+const kv=()=>`<h1>One-time pass keys</h1><p class="mu">Create a key, share it privately with one person, and it stops working after a single use.</p><div class="card"><div class="row"><label style="flex:2;min-width:180px">Who is it for?<input id="kl" placeholder="e.g. Aditya"></label><label style="flex:1;min-width:140px">Valid for<select id="kvl"><option value="10">10 minutes</option><option value="60" selected>1 hour</option><option value="1440">24 hours</option></select></label></div><button class="b" id="kg">Generate key</button><div id="nk"></div></div><h2>All keys</h2><div id="kls" class="grid"><p class="mu">Loading…</p></div>`;
+async function kl(){try{const j=await api('/api/auth',{action:'list'},tk),t=Date.now(),el=$('#kls');if(!el)return;el.innerHTML=j.keys.map(x=>`<div class="card"><span class="tag">${x.used?'Used':t>x.exp?'Expired':'Active'}</span><h3 style="margin:8px 0 2px">${esc(x.label)}</h3><p class="mu" style="margin:0 0 10px;font-size:14px">${x.used?'Used by '+esc(x.by)+' · '+new Date(x.at).toLocaleString():'Expires '+new Date(x.exp).toLocaleString()}</p><button class="b g" data-rv="${x.id}">${x.used?'Revoke access':'Delete'}</button></div>`).join('')||'<p class="mu">No keys yet.</p>';el.querySelectorAll('[data-rv]').forEach(b=>b.onclick=async()=>{await api('/api/auth',{action:'revoke',id:b.dataset.rv},tk);kl()})}catch(e){if(e.status==401)logout()}}
+function kw(){$('#kg').onclick=async()=>{try{const j=await api('/api/auth',{action:'keygen',label:$('#kl').value.trim(),mins:+$('#kvl').value},tk);$('#nk').innerHTML=`<p class="mu" style="margin:12px 0 0">Copy it now — it is shown only once:</p><div class="nk">${j.key}</div><button class="b g" id="cp">Copy key</button>`;$('#cp').onclick=()=>navigator.clipboard&&navigator.clipboard.writeText(j.key);$('#kl').value='';kl()}catch(e){if(e.status==401)return logout();$('#nk').textContent=e.message}};kl()}
+render();
+fetch('/api/content').then(r=>r.ok?r.json():null).then(j=>{if(j&&j.tag&&Array.isArray(j.team)){D=j;if(tk)render(1)}}).catch(()=>{});
+</script></body></html>
